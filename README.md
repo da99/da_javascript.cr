@@ -2,9 +2,11 @@
 da\_javascript.cr
 ==================
 
-All my code is awful. Don't use it.
+ABANDONED. Just use any of the following alternatives:
 
-Instead, use [PureScript](http://www.purescript.org) or [Elm](http://elm-lang.org).
+* [PureScript](http://www.purescript.org)
+* [Elm](http://elm-lang.org).
+* [JS++](https://www.onux.com/jspp/)
 
 Unrelated:
 =================

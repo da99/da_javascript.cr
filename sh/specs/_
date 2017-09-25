@@ -1,0 +1,38 @@
+#!/usr/bin/env zsh
+#
+# === {{CMD}} run
+# === {{CMD}} watch
+#
+set -u -e -o pipefail
+
+local +x ORIGINAL_ARGS="$@"
+local +x ACTION=$1; shift
+
+case "$ACTION" in
+
+  watch)
+    local +x cmd="da_javascript.cr specs run $@"
+    ${=cmd} || :
+    process watch "-r bin -r sh -r src -r specs" "$cmd"
+    ;;
+
+  run)
+    reset
+    mkdir -p tmp/
+
+    sh_color ORANGE "=== Compiling specs..."
+    my_crystal __ build specs/specs.cr -o tmp/da_javascript.specs
+
+    sh_color ORANGE "=== {{Running}}: tmp/da_javascript.specs $@ "
+    time tmp/da_javascript.specs $@
+
+    sh_color GREEN "=== {{DONE}} ===" >&2
+    ;;
+
+  *)
+    echo "!!! Unknown arguments: $ORIGINAL_ARGS" >&2
+    exit 1
+    ;;
+
+esac
+
